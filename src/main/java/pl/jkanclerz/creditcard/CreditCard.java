@@ -10,17 +10,25 @@ public class CreditCard {
 
     }
 
-    public void assignLimit(BigDecimal creditAmount) {
-        if (credit != null) {
-            throw new CantReassignCreditExceptions();
+    public void assignCredit(BigDecimal creditAmount) {
+        if (isCreditAlreadyAssigned()) {
+            throw new ReassignCreditExceptions();
         }
 
-        if (creditAmount.compareTo(BigDecimal.valueOf(100)) < 0) {
-            throw new CreditBelowLimitException();
+        if (isCreditBelowThreshold(creditAmount)) {
+            throw new CreditBelowThresholdException();
         }
+
         this.balance = creditAmount;
         this.credit = creditAmount;
+    }
 
+    private boolean isCreditAlreadyAssigned() {
+        return credit != null;
+    }
+
+    private boolean isCreditBelowThreshold(BigDecimal creditAmount) {
+        return creditAmount.compareTo(BigDecimal.valueOf(100)) < 0;
     }
 
     public BigDecimal getCurrentBalance() {
