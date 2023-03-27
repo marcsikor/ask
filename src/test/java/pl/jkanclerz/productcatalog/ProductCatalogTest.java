@@ -16,22 +16,26 @@ public class ProductCatalogTest {
         assertListIsEmpty(products);
     }
 
-    private ProductCatalog thereIsProductCatalog() {
-        return new ProductCatalog();
-    }
-
-    private void assertListIsEmpty(List<Product> products) {
-        assert 0 == products.size();
-    }
-
     @Test
     void itAllowsToAddProduct() {
         //Arrange
         ProductCatalog catalog = thereIsProductCatalog();
         //Act
-
+        String productId = catalog.addProduct("lego set 8083", "nice one");
 
         //Assert
+        List<Product> products = catalog.allProducts();
+        assert 1 == products.size();
+    }
+
+    @Test
+    void itAllowsToLoadProductDetails() {
+        ProductCatalog catalog = thereIsProductCatalog();
+
+        String productId = catalog.addProduct("lego set 8083", "nice one");
+
+        Product loadedProduct = catalog.loadById(productId);
+        assert loadedProduct.getId().equals(productId);
     }
 
     @Test
@@ -52,5 +56,13 @@ public class ProductCatalogTest {
     @Test
     void publicationIsPossibleWhenPriceAndImageAreDefined() {
 
+    }
+
+    private ProductCatalog thereIsProductCatalog() {
+        return new ProductCatalog();
+    }
+
+    private void assertListIsEmpty(List<Product> products) {
+        assert 0 == products.size();
     }
 }
