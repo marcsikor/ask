@@ -2,19 +2,18 @@ package pl.jkanclerz.productcatalog;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ProductCatalog {
-    private Map<String, Product> products;
+    // Business
+    // Technical
+    private ProductStorage productStorage;
 
-    public ProductCatalog() {
-        this.products = new HashMap<>();
+    public ProductCatalog(ProductStorage productStorage) {
+        this.productStorage = productStorage;
     }
 
     public List<Product> allProducts() {
-        return products.values()
-                .stream()
-                .collect(Collectors.toList());
+        return productStorage.allProducts();
     }
 
     public String addProduct(String name, String desc) {
@@ -24,13 +23,13 @@ public class ProductCatalog {
                 desc
         );
 
-        products.put(newOne.getId(), newOne);
+        productStorage.add(newOne);
 
         return newOne.getId();
     }
 
     public Product loadById(String productId) {
-        return products.get(productId);
+        return productStorage.loadById(productId);
     }
 
     public void changePrice(String productId, BigDecimal newPrice) {
@@ -60,9 +59,6 @@ public class ProductCatalog {
     }
 
     public List<Product> allPublishedProducts() {
-        return products.values()
-                .stream()
-                .filter(Product::getOnline)
-                .collect(Collectors.toList());
+        return productStorage.allPublishedProducts();
     }
 }
