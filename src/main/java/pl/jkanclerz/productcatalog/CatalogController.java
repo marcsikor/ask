@@ -14,6 +14,7 @@ public class CatalogController {
     CatalogController(ProductCatalog productCatalog) {
         this.productCatalog = productCatalog;
     }
+
     @GetMapping("/api/products")
     List<Product> allProducts() {
         return productCatalog.allPublishedProducts();
