@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.jkanclerz.productcatalog.HashMapProductStorage;
 import pl.jkanclerz.productcatalog.ProductCatalog;
+import pl.jkanclerz.sales.Sales;
+import pl.jkanclerz.sales.cart.CartStorage;
+import pl.jkanclerz.sales.offering.OfferCalculator;
+import pl.jkanclerz.sales.productdetails.InMemoryProductDetailsProvider;
 
 import java.math.BigDecimal;
 
@@ -30,5 +34,11 @@ public class App {
         productCatalog.publishProduct(productId2);
 
         return productCatalog;
+    }
+
+    @Bean
+    Sales createSales() {
+        InMemoryProductDetailsProvider productDetails = new InMemoryProductDetailsProvider();
+        return new Sales(new CartStorage(), productDetails, new OfferCalculator(productDetails));
     }
 }
