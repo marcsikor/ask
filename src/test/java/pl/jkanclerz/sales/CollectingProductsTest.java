@@ -7,8 +7,10 @@ import pl.jkanclerz.sales.cart.CartStorage;
 import pl.jkanclerz.sales.offering.Offer;
 import pl.jkanclerz.sales.offering.OfferCalculator;
 import pl.jkanclerz.sales.offering.OfferLine;
+import pl.jkanclerz.sales.payment.SpyPaymentGateway;
 import pl.jkanclerz.sales.productdetails.InMemoryProductDetailsProvider;
 import pl.jkanclerz.sales.productdetails.ProductDetails;
+import pl.jkanclerz.sales.reservation.InMemoryReservationStorage;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -106,7 +108,13 @@ public class CollectingProductsTest {
     }
 
     private Sales thereIsSalesModule() {
-        return new Sales(cartStorage, productDetails, new OfferCalculator(productDetails));
+        return new Sales(
+                cartStorage,
+                productDetails,
+                new OfferCalculator(productDetails),
+                new SpyPaymentGateway(),
+                new InMemoryReservationStorage()
+        );
     }
 
 }
