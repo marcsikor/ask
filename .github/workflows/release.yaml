@@ -21,5 +21,10 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
          artifacts: "target/my-ecommerce-0.1.jar"
+         body: |
+	    The name of your branch is ${{ github.ref }}
+            ${GITHUB_REF_NAME}
+            ${GITHUB_REPOSITORY}
+            ${GITHUB_JOB}
 
     
