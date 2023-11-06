@@ -23,8 +23,8 @@ jobs:
          artifacts: "target/my-ecommerce-0.1.jar"
          body: |
 	    The name of your branch is ${{ github.ref }}
-            ${GITHUB_REF_NAME}
-            ${GITHUB_REPOSITORY}
-            ${GITHUB_JOB}
+            ${{GITHUB_REF_NAME}}
+            ${{GITHUB_REPOSITORY}}
+            ${{GITHUB_JOB}}
 
     
