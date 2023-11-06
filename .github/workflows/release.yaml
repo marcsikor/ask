@@ -21,9 +21,5 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
          artifacts: "target/my-ecommerce-0.1.jar"
-	 body: |
-           ### Heading
-
-           * Bullet
-           * Points
+	 bodyFile: "releases/${{ github.ref }}.md"
     
