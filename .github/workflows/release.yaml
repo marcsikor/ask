@@ -37,6 +37,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           architecture: x64
+      - run: echo "..."
       - run: mvn package
       - run: ls -la target/
       - uses: ncipollo/release-action@v1.13.0
