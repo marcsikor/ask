@@ -1,4 +1,4 @@
-name: Test new release
+name: Test application after new commit
 on: 
   - push
 jobs:
