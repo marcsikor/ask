@@ -1,8 +1,8 @@
 name: release my app
 on: 
-  push
-    # tags:
-    #   - release*
+  push:
+    tags:
+      - release*
 jobs:
   RunUnitTests:
     runs-on: ubuntu-latest
