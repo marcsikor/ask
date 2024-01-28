@@ -2,7 +2,7 @@ name: release my app
 on: 
   push:
     tags:
-      - deploy*
+      - release*
 jobs:
   RunUnitTests:
     runs-on: ubuntu-latest
