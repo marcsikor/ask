@@ -1,0 +1,24 @@
+name: Test new release
+on: 
+  - push
+jobs:
+  CIToolWorks:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Attempt to test ${{ github.repository }} repository"
+  RunUnitTests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ls -la 
+      - name: Set up JDK 11 for x64
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          architecture: x64
+      - name: Compile project
+        run: mvn compile
+      - name: Test project
+        run: mvn test
+      - run: echo "Application passed tests"
